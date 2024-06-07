@@ -209,7 +209,9 @@ export function formatDate(
   format: string,
   locale: string | null = null,
 ): string {
-  let datetime = luxon.DateTime.isDateTime(date) ? date : luxon.DateTime.fromJSDate(date);
+  let datetime = luxon.DateTime.isDateTime(date)
+    ? date
+    : luxon.DateTime.fromJSDate(date);
   if (locale) {
     datetime = datetime.setLocale(locale);
   }
@@ -254,7 +256,8 @@ export function weekday(date: Date): number {
 }
 
 export function isoWeekday(date: Date): number {
-  const dayStr = luxon.DateTime.fromJSDate(date).toISOWeekDate()?.split('-')[2] ?? '';
+  const dayStr =
+    luxon.DateTime.fromJSDate(date).toISOWeekDate()?.split('-')[2] ?? '';
   return parseInt(dayStr, 10);
 }
 
@@ -322,7 +325,9 @@ export function normalizeRangeActionValue(val: {
       start: val.date.start
         ? luxon.DateTime.fromJSDate(val.date.start)
         : val.date.start,
-      end: val.date.end ? luxon.DateTime.fromJSDate(val.date.end) : val.date.end,
+      end: val.date.end
+        ? luxon.DateTime.fromJSDate(val.date.end)
+        : val.date.end,
     },
   };
 }
@@ -332,14 +337,18 @@ export function normalizeMultipleActionValue(val: {
 }): NormalizeMultipleActionValue {
   return {
     date: val.date,
-    datetime: val.date ? val.date.map((e) => luxon.DateTime.fromJSDate(e)) : val.date,
+    datetime: val.date
+      ? val.date.map((e) => luxon.DateTime.fromJSDate(e))
+      : val.date,
   };
 }
 
 export function normalizeCalendarDay(day: PowerCalendarDay): PowerCalendarDay {
-  console.log(day.date)
+  console.log(day.date);
   day.datetime = luxon.DateTime.fromJSDate(day.date);
+  console.log(day.datetime);
   day.number = parseInt((day.datetime as DateTime).toFormat('d'), 10);
+  console.log(day.number);
   return day;
 }
 
@@ -395,14 +404,17 @@ export function normalizeDuration(value: unknown): number | null | undefined {
     const quantity = matches[1] ?? '';
     let units = matches[2]?.trim() || 'days';
     units = DURATION_UNITS[units] || units;
-    const duration = luxon.Duration.fromObject({ [units]: parseInt(quantity, 10) });
+    const duration = luxon.Duration.fromObject({
+      [units]: parseInt(quantity, 10),
+    });
     return duration.valueOf();
   }
 }
 
 export function getDefaultLocale(): string {
   return (
-    luxon.Settings.defaultLocale || luxon.DateTime.local().resolvedLocaleOptions().locale
+    luxon.Settings.defaultLocale ||
+    luxon.DateTime.local().resolvedLocaleOptions().locale
   );
 }
 
