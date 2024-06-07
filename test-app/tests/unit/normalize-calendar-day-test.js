@@ -10,7 +10,7 @@ module('Unit | Utility | normalize-calendar-day', function (hooks) {
   test('normalizeCalendarDay', function (assert) {
     setTimezone('Pacific/Niue');
 
-    let date = new Date('2020-01-02T00:00:00Z');
+    let date = new Date(Date.UTC(2020, 0, 2, 0, 0));
 
     const calendarDay = normalizeCalendarDay({
       id: 1,
