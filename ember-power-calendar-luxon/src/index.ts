@@ -337,6 +337,7 @@ export function normalizeMultipleActionValue(val: {
 }
 
 export function normalizeCalendarDay(day: PowerCalendarDay): PowerCalendarDay {
+  console.log(day.date)
   day.datetime = luxon.DateTime.fromJSDate(day.date);
   day.number = parseInt((day.datetime as DateTime).toFormat('d'), 10);
   return day;
