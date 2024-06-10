@@ -1,3 +1,4 @@
 packages:
   - 'ember-power-calendar-luxon'
   - 'test-app'
+  - 'test-app-embroider'
