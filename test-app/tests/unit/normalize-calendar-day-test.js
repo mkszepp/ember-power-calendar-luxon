@@ -10,7 +10,7 @@ module('Unit | Utility | normalize-calendar-day', function (hooks) {
   test('normalizeCalendarDay', function (assert) {
     setTimezone('Pacific/Niue');
 
-    let date = new Date('2020-01-02T00:00:00Z');
+    let date = new Date(Date.UTC(2020, 0, 2, 0, 0));
 
     const calendarDay = normalizeCalendarDay({
       id: 1,
@@ -24,6 +24,9 @@ module('Unit | Utility | normalize-calendar-day', function (hooks) {
     });
 
     assert.strictEqual(calendarDay.datetime.zoneName, 'Pacific/Niue');
-    assert.strictEqual(calendarDay.datetime.toISO(), '2020-01-01T13:00:00.000-11:00');
+    assert.strictEqual(
+      calendarDay.datetime.toISO(),
+      '2020-01-01T13:00:00.000-11:00',
+    );
   });
 });
